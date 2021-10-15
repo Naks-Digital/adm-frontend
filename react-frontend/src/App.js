@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import List from "./list";
-import Fetch_from_api from "./fetch_from_api";
+import FetchRandomUser from "./fetch_from_api";
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
     //   </header>
     // </div>
     <div>
-      <List />
-      <Fetch_from_api />
+      {/* <List /> */}
+      <FetchRandomUser />
     </div>
   );
 }

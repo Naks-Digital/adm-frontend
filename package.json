@@ -1,0 +1,22 @@
+{
+  "name": "adm-frontend",
+  "version": "1.0.0",
+  "description": "React frontend for the application",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Naks-Digital/adm-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Naks-Digital/adm-frontend/issues"
+  },
+  "homepage": "https://github.com/Naks-Digital/adm-frontend#readme"
+}

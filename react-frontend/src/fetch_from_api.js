@@ -1,59 +1,76 @@
-// import React from "react";
-
-// export default class Fetch_from_api extends React.Component {
-//   state = {
-//     loading: false,
-//   };
-//   async componentDidMount() {
-//       const url = "https://api.randomuser.me/";
-//       const response = await fetch(url);
-//       const data = await response.json();
-//       console.log(data);
-//   }
-//   render() {
-//     return (
-//       <div>
-//         {this.state.loading ? <div>loading...</div> : <div>{this.data.results[0].name.title}</div>}
-//       </div>
-//     );
-//   }
-// }
-
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import React, { Component } from "react";
 import * as ReactBootStrap from "react-bootstrap";
 
-export default class FetchRandomUser extends React.Component {
-  state = {
-    loading: true,
-    person: null,
-  };
-
-  async componentDidMount() {
-    const url = "https://api.randomuser.me/";
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({ person: data.results[0], loading: false });
-    console.log(data);
+export default class FetchRandomUser extends Component {
+  constructor() {
+    super();
+    this.state = {
+      siteData: null,
+    };
   }
 
-  render() {
-    if (this.state.loading) {
-      return <div>loading...</div>;
-    }
+  componentDidMount = () => {
+    axios.get("/media").then((response) => {
+      console.log(response.data[1]);
+      this.setState({
+        siteData: response.data,
+      });
+      console.log(this.state.siteData);
+    });
+  };
 
-    if (!this.state.person) {
-      return <div>didn't get a person</div>;
-    }
-
+  renderData = (siteData, index) => {
     return (
-      <div>
-        <div>
-          {this.state.person.name.title}&nbsp;{this.state.person.name.first}
-          &nbsp;{this.state.person.name.last}
-        </div>
-        <img src={this.state.person.picture.large} />
-      </div>
+      <tr key={index}>
+        <td>{siteData.siteCode}</td>
+        <td>{siteData.subEnvironment}</td>
+        <td>{siteData.stateName}</td>
+        <td>{siteData.cityName}</td>
+        <td>{siteData.Location}</td>
+        <td>{siteData.trafficMovement}</td>
+        <td>{siteData.postCode}</td>
+        <td>{siteData.Latitude}</td>
+        <td>{siteData.Longitude}</td>
+        <td>{siteData.mediaVehicle}</td>
+        <td>{siteData.sizeW}</td>
+        <td>{siteData.sizeH}</td>
+        <td>{siteData.Position}</td>
+        <td>{siteData.mediaType}</td>
+        <td>{siteData.displayCost}</td>
+        <td>{siteData.printingMaterial}</td>
+        </tr>
+    );
+  };
+
+  render() {
+    const { siteData } = this.state;
+    if (!siteData) return <div>didn't get anything</div>;
+    return (
+      <ReactBootStrap.Table>
+        <thead>
+          <tr>
+            <th>SiteCode</th>
+            <th>SubEnvironment</th>
+            <th>StateName</th>
+            <th>CityName</th>
+            <th>Location</th>
+            <th>Traffic Movement</th>
+            <th>Postcode</th>
+            <th>Lattitude</th>
+            <th>Longitude</th>
+            <th>MediaVehicle</th>
+            <th>Size-W</th>
+            <th>Size-H</th>
+            <th>Position</th>
+            <th>Media Type</th>
+            <th>DisplayCost</th>
+            <th>Printing Material</th>
+          </tr>
+        </thead>
+        <tbody>{siteData.map(this.renderData)}</tbody>
+      </ReactBootStrap.Table>
+      //   <div>{siteData.map(this.renderData)}</div>
     );
   }
 }

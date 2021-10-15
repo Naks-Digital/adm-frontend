@@ -1,6 +1,6 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
-import List from "./list";
+// import List from "./list";
 import FetchRandomUser from "./fetch_from_api";
 
 function App() {

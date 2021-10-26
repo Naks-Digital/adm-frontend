@@ -40,7 +40,7 @@ export default class FetchRandomUser extends Component {
         <td>{siteData.mediaType}</td>
         <td>{siteData.displayCost}</td>
         <td>{siteData.printingMaterial}</td>
-        </tr>
+      </tr>
     );
   };
 

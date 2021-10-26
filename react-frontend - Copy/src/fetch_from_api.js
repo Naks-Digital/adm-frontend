@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import * as ReactBootStrap from "react-bootstrap";
-// import "./fetch_from_api.css";
+import "./fetch_from_api.css";
 
 export default class FetchRandomUser extends Component {
   constructor() {

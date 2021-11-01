@@ -24,22 +24,22 @@ export default class FetchRandomUser extends Component {
   renderData = (siteData, index) => {
     return (
       <tr key={index}>
-        <td>{siteData.sitecode}</td>
-        <td>{siteData.subenvironment}</td>
-        <td>{siteData.statename}</td>
-        <td>{siteData.cityname}</td>
+        <td>{siteData.site_code}</td>
+        <td>{siteData.sub_environment}</td>
+        <td>{siteData.state_name}</td>
+        <td>{siteData.city_name}</td>
         <td>{siteData.location}</td>
-        <td>{siteData.trafficmovement}</td>
-        <td>{siteData.postcode}</td>
+        <td>{siteData.traffic_movement}</td>
+        <td>{siteData.post_code}</td>
         <td>{siteData.latitude}</td>
         <td>{siteData.longitude}</td>
-        <td>{siteData.mediavehicle}</td>
-        <td>{siteData.sizew}</td>
-        <td>{siteData.sizeh}</td>
+        <td>{siteData.media_vehicle}</td>
+        <td>{siteData.size_w}</td>
+        <td>{siteData.size_h}</td>
         <td>{siteData.position}</td>
-        <td>{siteData.mediatype}</td>
-        <td>{siteData.displaycost}</td>
-        <td>{siteData.printingmaterial}</td>
+        <td>{siteData.media_type}</td>
+        <td>{siteData.display_cost}</td>
+        <td>{siteData.printing_material}</td>
       </tr>
     );
   };

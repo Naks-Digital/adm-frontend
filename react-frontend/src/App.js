@@ -9,10 +9,10 @@ require("isomorphic-fetch");
 export default function App() {
   const [data, setData] = useState([]);
   const [q, setQ] = useState("");
-  const [searchColumns, setSearchColumns] = useState(["sitecode", "cityname", "location"])
+  const [searchColumns, setSearchColumns] = useState(["site_code", "city_name", "location"])
 
   useEffect(() => {
-    axios.get("/medialist").then((response) => {
+    axios.get("/media").then((response) => {
       
       setData(response.data);
       console.log(response.data);
@@ -37,6 +37,7 @@ export default function App() {
     // console.log(data+"data");
     // console.log("rows data");
     console.log(rows);
+    console.log(data);
     // console.log(q);
     return rows.filter((row) =>
       searchColumns.some(

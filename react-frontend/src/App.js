@@ -8,12 +8,18 @@ require("isomorphic-fetch");
 
 export default function App() {
   const [data, setData] = useState([]);
-  const [q, setQ] = useState("");
-  const [searchColumns, setSearchColumns] = useState(["site_code", "city_name", "location"])
+  const [site, setSite] = useState("");
+  const [city, setCity] = useState("");
+  const [loc, setLoc] = useState("");
+  const [apiRes, setApiRes] = useState([]);
+  const [searchColumns, setSearchColumns] = useState([
+    "site_code",
+    "city_name",
+    "location",
+  ]);
 
   useEffect(() => {
     axios.get("/media").then((response) => {
-      
       setData(response.data);
       console.log(response.data);
     });
@@ -28,31 +34,43 @@ export default function App() {
   // function search(rows){
   //   console.log(rows);
   //   return (
-  //     rows.filter(rows => rows.siteCode.toLowerCase().indexOf(q) > -1 ||
-  //     rows.cityName.toLowerCase().indexOf(q) > -1 ||
-  //     rows.Location.toLowerCase().indexOf(q) > -1 ));
+  //     rows.filter(rows => rows.siteCode.toLowerCase().indexOf(site) > -1 ||
+  //     rows.cityName.toLowerCase().indexOf(site) > -1 ||
+  //     rows.Location.toLowerCase().indexOf(site) > -1 ));
   // }
 
   function search(rows) {
     // console.log(data+"data");
     // console.log("rows data");
-    console.log(rows);
-    console.log(data);
-    // console.log(q);
+    // console.log(rows);
+    // console.log(data);
+    // console.log(site);
     return rows.filter((row) =>
       searchColumns.some(
-
         // console.log(row)
         // (column) => {<div>{row[column]}</div>
         // console.log(row[column]+"rc");}
-        
-        (column) => row[column].toString().toLowerCase().indexOf(q.toLowerCase()) > -1
+
+        (column) =>
+          row[column].toString().toLowerCase().indexOf(site.toLowerCase()) > -1
       )
     );
   }
 
+  function clickclick() {
+    axios
+      .get(
+        "/media/?site_code=" + site + "&city_name=" + city + "&location=" + loc
+      )
+      .then((res) => {
+        setApiRes(res);
+        console.log("/media/?site_code=" + site + "&city_name=" + city + "&location=" + loc);
+        console.log("This is fetched backend data" + res.data);
+      });
+  }
+
   // function searchWithAPI(item) {
-  //   setQ(item);
+  //   setSite(item);
   //   axios.get(`/media/?siteCode=${item}`).then((resdata) => {
   //     console.log("later");
   //     console.log(resdata.data);
@@ -64,8 +82,23 @@ export default function App() {
   return (
     <div>
       <div>
-        <input type="text" value={q} onChange={(e) => setQ(e.target.value)} />
-        {/* <input type="text" value={q} onChange={(e) => searchWithAPI(e.target.value)} /> */}
+        <input
+          type="text"
+          value={site}
+          onChange={(e) => setSite(e.target.value)}
+        />
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
+        <input
+          type="text"
+          value={loc}
+          onChange={(e) => setLoc(e.target.value)}
+        />
+        <button onClick={clickclick}>clickclick</button>
+        {/* <input type="text" value={site} onChange={(e) => searchWithAPI(e.target.value)} /> */}
         {
           // columns && columns.map(column => <lable>
           //   <input type="checkbox" checked={searchColumns.includes(column)} onChange={(e) => {

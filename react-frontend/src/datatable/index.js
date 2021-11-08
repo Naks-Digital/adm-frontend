@@ -6,10 +6,10 @@ export default function Datatable({ data }) {
     <div>
       <table cellPadding={2} cellSpacing={2}>
         <thead>
-          <tr>
+          {/* <tr>
             {data[0] && Object.keys(data[0]).map((item) => <th>{item}</th>)}
-          </tr>
-          {/* <th>SiteCode</th>
+          </tr> */}
+          <th>SiteCode</th>
           <th>SubEnvironment</th>
           <th>StateName</th>
           <th>CityName</th>
@@ -24,7 +24,7 @@ export default function Datatable({ data }) {
           <th>Position</th>
           <th>Media Type</th>
           <th>DisplayCost</th>
-          <th>Printing Material</th> */}
+          <th>Printing Material</th>
         </thead>
         <tbody>
           {data.map((rows) => (
@@ -53,6 +53,7 @@ export default function Datatable({ data }) {
           ))}
         </tbody>
       </table>
+      <div id="garbage"></div>
       {data.length === 0 && <p>No data found</p>}
     </div>
   );

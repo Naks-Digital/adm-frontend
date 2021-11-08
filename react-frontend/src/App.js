@@ -57,6 +57,14 @@ export default function App() {
     );
   }
 
+  // function clickclick() {
+  //   const element = document.querySelector("#post-request .article-id");
+  //   const article = { site, city, loc };
+  //   axios
+  //     .post("/media", article)
+  //     .then((response) => (document.getElementById("garbage").innerHTML = response.data));
+  // }
+
   function clickclick() {
     axios
       .get(
@@ -65,7 +73,11 @@ export default function App() {
       .then((res) => {
         setApiRes(res);
         console.log("/media/?site_code=" + site + "&city_name=" + city + "&location=" + loc);
-        console.log("This is fetched backend data" + res.data);
+        console.log("This is fetched backend data :" + res.data);
+        console.log("This is status of the fetched backend data :" + res.status);
+        console.log("This is statusText of the fetched backend data :" + res.statusText);
+        console.log("This is headers of the fetched backend data :" + res.headers);
+        console.log("This is config of the fetched backend data :" + res.config);
       });
   }
 

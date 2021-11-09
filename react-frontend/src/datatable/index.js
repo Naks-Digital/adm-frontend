@@ -4,26 +4,27 @@ import "../fetch_from_api.css";
 export default function Datatable({ data }) {
   return (
     <div>
+      <div id="empty_response"></div>
       <table cellPadding={2} cellSpacing={2}>
         <thead>
           {/* <tr>
             {data[0] && Object.keys(data[0]).map((item) => <th>{item}</th>)}
           </tr> */}
-          <th>SiteCode</th>
-          <th>SubEnvironment</th>
-          <th>StateName</th>
-          <th>CityName</th>
+          <th>Site Code</th>
+          <th>Sub Environment</th>
+          <th>State Name</th>
+          <th>City Name</th>
           <th>Location</th>
           <th>Traffic Movement</th>
-          <th>Postcode</th>
+          <th>Post Code</th>
           <th>Lattitude</th>
           <th>Longitude</th>
-          <th>MediaVehicle</th>
-          <th>Size-W</th>
-          <th>Size-H</th>
+          <th>Media Vehicle</th>
+          <th>Width</th>
+          <th>Height</th>
           <th>Position</th>
           <th>Media Type</th>
-          <th>DisplayCost</th>
+          <th>Display Cost</th>
           <th>Printing Material</th>
         </thead>
         <tbody>
@@ -46,9 +47,9 @@ export default function Datatable({ data }) {
               <td>{rows.display_cost}</td>
               <td>{rows.additional_size_comments}</td>
               <td>{rows.printing_material}</td>
-              <td>{rows.onwer_of_media}</td>
+              {/* <td>{rows.onwer_of_media}</td>
               <td>{rows.createdat}</td>
-              <td>{rows.updatedat}</td>
+              <td>{rows.updatedat}</td> */}
             </tr>
           ))}
         </tbody>

@@ -160,3 +160,20 @@ export default function App() {
     </div>
   );
 }
+
+
+
+
+{
+Did
+	The object object issue
+	View of the table
+	Displayed only the required data in table
+	Handled the situation if the response of filtered data is empty
+
+
+Want to do further
+	provide dropdown to select from in place of text boxes
+	improve the code
+Doubt
+	undefined in models not working}

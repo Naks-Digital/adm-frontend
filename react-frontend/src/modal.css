@@ -1,0 +1,7 @@
+.modal-body{
+    display: flex !important;
+}
+
+.inputs{
+    display: grid;
+}

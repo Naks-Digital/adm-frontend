@@ -11,13 +11,43 @@ export default function Datatable({ data }) {
 
   const [priceDetails, setPriceDetails] = useState([]);
   const [checkTrue, setCheckTrue] = useState(false);
+  const [checkTrueArr, setCheckTrueArr] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
-  function ifChecked(checkedId) {
+  function ifChecked(checkedId, cost) {
     // alert(checkedId);
     console.log(checkedId);
-    priceDetails.push(checkedId);
+    console.log(cost);
+    priceDetails.push(cost);
     setPriceDetails(priceDetails);
+    console.log(priceDetails);
     setCheckTrue(true);
+    console.log(checkTrueArr);
   }
 
   return (
@@ -29,9 +59,11 @@ export default function Datatable({ data }) {
             <div className="check_card">
               <input
                 type="checkbox"
-                id={rows.display_cost}
-                onChange={(e) => {
-                  ifChecked(e.target.id);
+                cost={rows.display_cost}
+                id={Object.keys(data)}
+                defaultChecked={false}
+                onChange={(e,cost) => {
+                  ifChecked(e.target.id, cost);
                 }}
               />
               <div className="media_card">
@@ -52,17 +84,26 @@ export default function Datatable({ data }) {
             </div>
           ))}
         </div>
-        <div className="total_price">{checkTrue?<div>
-            All Sites:<div>{priceDetails.map((elmnt) => (<p>{elmnt}</p>))}</div>
+        <div className="total_price">
+          {checkTrue ? (
+            <div>
+              All Sites:
+              <div>
+                {priceDetails.map((elmnt) => (
+                  <p>{elmnt}</p>
+                ))}
+              </div>
               {/* {priceDetails.map((elmnt) => (
                 <p>{elmnt},</p>
               ))} */}
-            {/* <i>Selected sites here with their respective prices</i> */}
-            <br />
-            Estimate Price: <div>{priceDetails}</div>
-            {/* <i>Total price of all sites</i> */}
-          </div>:""}
-          
+              {/* <i>Selected sites here with their respective prices</i> */}
+              <br />
+              Estimate Price: <div>{priceDetails}</div>
+              {/* <i>Total price of all sites</i> */}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       {/* <table cellPadding={2} cellSpacing={2}>

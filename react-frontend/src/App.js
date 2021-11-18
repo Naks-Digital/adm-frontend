@@ -16,8 +16,7 @@ export default function App() {
   const [loc, setLoc] = useState("");
   const [apiRes, setApiRes] = useState([]);
   const [show, setShow] = useState(false);
-  const [getValue, setGetValue] = useState("");
-  const [dataObj, setDataObj] = useState({
+  const [newSite, setNewSite] = useState({
     site_code: "",
     sub_environment: "",
     state_name: "",
@@ -28,8 +27,8 @@ export default function App() {
     latitude: "",
     longitude: "",
     media_vehicle: "",
-    size_w: "",
     size_h: "",
+    size_w: "",
     position: "",
     media_type: "",
     display_cost: "",
@@ -55,13 +54,12 @@ export default function App() {
   function addTheSite() {
     setShow(false);
     axios
-      .post("/media", {
-        dataObj,
-      })
-      .then(function (response) {
+      .post("/media", newSite)
+      .then((response) => {
         console.log("posted the data");
         console.log(response);
-      });
+      })
+      .catch((error) => console.log(error));
   }
 
   function clickclick() {
@@ -96,12 +94,32 @@ export default function App() {
       });
   }
 
-  function captureResponse(inputResponse, id) {
-    // setDataObj((dataObj[id] = inputResponse));        //Here is the problem**
-    console.log(id);
-    console.log(inputResponse);
-    console.log(dataObj);
-  }
+  const captureResponse = (event) => {
+    console.log(event.target.value);
+    // setGetValue(event.target.value);
+    // setNewSite((newSite) => (newSite[event.target.id] = event.target.value)); //Here is the problem**
+
+    const copyObj = newSite;
+    copyObj[event.target.id] = event.target.value;
+    console.log(event.target.id);
+    console.log(event.target.value);
+    console.log(copyObj);
+    setNewSite({ ...copyObj });
+
+    // console.log(getValue);
+  };
+
+  // useEffect(() => {
+  //   function captureResponse(e, inputResponse, id) {
+  //     console.log(inputResponse);
+  //     // setGetValue(inputResponse);
+  //     setNewSite((newSite[id] = inputResponse)); //Here is the problem**
+  //     console.log(id);
+  //     console.log(inputResponse);
+  //     console.log(newSite);
+  //     console.log(getValue);
+  //   }
+  // });
 
   return (
     <div>
@@ -150,12 +168,8 @@ export default function App() {
                 <input
                   type="text"
                   id="site_code"
-                  // value={(e) => {
-                  //   setGetValue(e.target.value);
-                  // }}
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  value={newSite.site_code}
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -163,9 +177,7 @@ export default function App() {
                 <input
                   type="text"
                   id="sub_environment"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -173,9 +185,7 @@ export default function App() {
                 <input
                   type="text"
                   id="state_name"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -183,9 +193,7 @@ export default function App() {
                 <input
                   type="text"
                   id="city_name"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -193,9 +201,7 @@ export default function App() {
                 <input
                   type="text"
                   id="location"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -203,9 +209,7 @@ export default function App() {
                 <input
                   type="text"
                   id="traffic_movement"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -213,9 +217,7 @@ export default function App() {
                 <input
                   type="text"
                   id="post_code"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -223,9 +225,7 @@ export default function App() {
                 <input
                   type="text"
                   id="latitude"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -233,9 +233,7 @@ export default function App() {
                 <input
                   type="text"
                   id="longitude"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -243,29 +241,23 @@ export default function App() {
                 <input
                   type="text"
                   id="media_vehicle"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
                 <label>Width : </label>
                 <input
                   type="text"
-                  id="width"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  id="size_w"
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
                 <label>Height : </label>
                 <input
                   type="text"
-                  id="height"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  id="size_h"
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -273,9 +265,7 @@ export default function App() {
                 <input
                   type="text"
                   id="position"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -283,9 +273,7 @@ export default function App() {
                 <input
                   type="text"
                   id="media_type"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -293,9 +281,7 @@ export default function App() {
                 <input
                   type="text"
                   id="display_cost"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -303,9 +289,7 @@ export default function App() {
                 <input
                   type="text"
                   id="additional_size_comments"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -313,9 +297,7 @@ export default function App() {
                 <input
                   type="text"
                   id="printing_material"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
               <div>
@@ -323,9 +305,7 @@ export default function App() {
                 <input
                   type="text"
                   id="owner_of_media"
-                  onBlur={(e, id) =>
-                    captureResponse(e.target.value, e.target.id)
-                  }
+                  onChange={captureResponse}
                 ></input>
               </div>
             </div>

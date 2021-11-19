@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { Button, Modal } from "react-bootstrap";
 import "../card.css";
 
 export default function Datatable({ data }) {
@@ -9,9 +10,14 @@ export default function Datatable({ data }) {
   //   {price_per_month: data.display_cost},
   // ];
 
-  const [priceDetails, setPriceDetails] = useState([]);
-  const [checkTrue, setCheckTrue] = useState(false);
+  const myContainer = useRef(null);
+
+  const [priceArray, setPriceArray] = useState([]);
+  var [sumPrice, setSumPrice] = useState(0);
+  const [modalShow, setModalShow] = useState(false);
+  const [expandedModalData, setExpandedModalData] = useState({});
   const [checkTrueArr, setCheckTrueArr] = useState([
+    false,
     false,
     false,
     false,
@@ -40,14 +46,61 @@ export default function Datatable({ data }) {
   ]);
 
   function ifChecked(checkedId, cost) {
-    // alert(checkedId);
-    console.log(checkedId);
-    console.log(cost);
-    priceDetails.push(cost);
-    setPriceDetails(priceDetails);
-    console.log(priceDetails);
-    setCheckTrue(true);
-    console.log(checkTrueArr);
+    // const checkTrueArrCopy = checkTrueArr;
+    // checkTrueArrCopy[checkedId] = true;
+    // setCheckTrueArr(checkTrueArrCopy);
+
+    // const priceDetailsCopy = priceArray;
+    // priceDetailsCopy.push(cost);
+    // setPriceArray(priceDetailsCopy);
+
+    // setPriceHtml(cost);
+    const priceArrayCopy = priceArray;
+    if (priceArrayCopy[checkedId] == null) {
+      priceArrayCopy[checkedId] = cost;
+      setPriceArray(priceArrayCopy);
+      console.log(priceArray);
+
+      const sumPriceCopy = sumPrice;
+      sumPriceCopy = sumPriceCopy + parseInt(cost);
+      setSumPrice(sumPriceCopy);
+    }
+  }
+
+  // function ifChecked(e) {
+  //   // const checkTrueArrCopy = checkTrueArr;
+  //   // checkTrueArrCopy[checkedId] = true;
+  //   // setCheckTrueArr(checkTrueArrCopy);
+
+  //   // const priceDetailsCopy = priceArray;
+  //   // priceDetailsCopy.push(cost);
+  //   // setPriceArray(priceDetailsCopy);
+
+  //   // setPriceHtml(cost);
+  //   var checkedId = e.target.id;
+  //   var cost = e.target.cost;
+  //   console.log(cost);
+  //   if (e.target.checked == true) alert("i am checked");
+  //   else alert("i am not checked");
+  //   const priceArrayCopy = priceArray;
+  //   if (priceArrayCopy[checkedId] == null) {
+  //     priceArrayCopy[checkedId] = cost;
+  //     setPriceArray(priceArrayCopy);
+  //     console.log(priceArray);
+
+  //     sumPrice = sumPrice + parseInt(cost);
+  //     setSumPrice(sumPrice);
+  //   }
+  // }
+
+  function expandCard(cardId) {
+    setModalShow(true);
+
+    var expandedModalDataCopy = expandedModalData;
+    expandedModalDataCopy = data[cardId];
+    setExpandedModalData(expandedModalDataCopy);
+
+    console.log(data[cardId]);
   }
 
   return (
@@ -55,19 +108,28 @@ export default function Datatable({ data }) {
       <div id="empty_response"></div>
       <div className="parent_cards_total">
         <div id="all_cards">
-          {data.map((rows) => (
+          {data.map((rows, index) => (
             <div className="check_card">
               <input
+                ref={myContainer}
                 type="checkbox"
                 cost={rows.display_cost}
-                id={Object.keys(data)}
+                id={index}
                 defaultChecked={false}
-                onChange={(e,cost) => {
-                  ifChecked(e.target.id, cost);
+                onChange={(e) => {
+                  ifChecked(e.target.id, rows.display_cost);
                 }}
+                // onChange={ifChecked}
               />
-              <div className="media_card">
-                <img src="/image.jpg" />
+              <div
+                // id={index}
+                className="media_card"
+                onClick={(e) => {
+                  console.log(e.target.id);
+                  expandCard(index);
+                }}
+              >
+                <img src="/image.jpg" alt="" />
                 <div>
                   <div className="card_details">
                     Site Code: {rows.site_code}
@@ -85,76 +147,65 @@ export default function Datatable({ data }) {
           ))}
         </div>
         <div className="total_price">
-          {checkTrue ? (
-            <div>
-              All Sites:
-              <div>
-                {priceDetails.map((elmnt) => (
-                  <p>{elmnt}</p>
-                ))}
-              </div>
-              {/* {priceDetails.map((elmnt) => (
-                <p>{elmnt},</p>
-              ))} */}
-              {/* <i>Selected sites here with their respective prices</i> */}
+          All sites:
+          {priceArray.map((onePrice) => (
+            <p>
+              {onePrice}
               <br />
-              Estimate Price: <div>{priceDetails}</div>
-              {/* <i>Total price of all sites</i> */}
-            </div>
-          ) : (
-            ""
-          )}
+            </p>
+          ))}
+          <br />
+          Estimated price: {sumPrice}
+          {/* <p>
+            {priceArray.map((onePrice) => {
+              sumPrice = sumPrice + parseInt(onePrice);
+              return sumPrice;
+            })}
+          </p> */}
         </div>
       </div>
-      {/* <table cellPadding={2} cellSpacing={2}>
-        <thead>
-          <tr>
-            {data[0] && Object.keys(data[0]).map((item) => <th>{item}</th>)}
-          </tr>    ------this tr tag should be commented-------
-          <th>Site Code</th>
-          <th>Sub Environment</th>
-          <th>State Name</th>
-          <th>City Name</th>
-          <th>Location</th>
-          <th>Traffic Movement</th>
-          <th>Post Code</th>
-          <th>Lattitude</th>
-          <th>Longitude</th>
-          <th>Media Vehicle</th>
-          <th>Width</th>
-          <th>Height</th>
-          <th>Position</th>
-          <th>Media Type</th>
-          <th>Display Cost</th>
-          <th>Printing Material</th>
-        </thead>
-        <tbody>
-          {data.map((rows) => (
-            <tr>
-              <td>{rows.uuid}</td>      ------this td tag should be commented-------
-              <td>{rows.site_code}</td>
-              <td>{rows.sub_environment}</td>
-              <td>{rows.state_name}</td>
-              <td>{rows.city_name}</td>
-              <td>{rows.location}</td>
-              <td>{rows.traffic_movement}</td>
-              <td>{rows.post_code}</td>
-              <td>{rows.latitude}</td>
-              <td>{rows.longitude}</td>
-              <td>{rows.size_w}</td>
-              <td>{rows.size_h}</td>
-              <td>{rows.position}</td>
-              <td>{rows.media_type}</td>
-              <td>{rows.display_cost}</td>
-              <td>{rows.additional_size_comments}</td>
-              <td>{rows.printing_material}</td>
-              <td>{rows.onwer_of_media}</td>    ------this td tag should be commented-------
-              <td>{rows.createdat}</td>    ------this td tag should be commented-------
-              <td>{rows.updatedat}</td>    ------this td tag should be commented-------
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+      <Modal
+        // data={expandedModalData}
+        show={modalShow}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body>
+          <img src="/image.jpg" alt="" />
+          <div>
+            {/* <div>Site Code :{data.site_code}</div> */}
+            <div>Sub Environment :</div>
+            <div>State Name :</div>
+            <div>City Name :</div>
+            <div>Location :</div>
+            <div>Traffic Movement :</div>
+            <div>Post Code :</div>
+            <div>Latitude :</div>
+            <div>Longitude :</div>
+            <div>Media Vehicle :</div>
+            <div>Width :</div>
+            <div>Height :</div>
+            <div>Position :</div>
+            <div>Media Type :</div>
+            <div>Display Cost :</div>
+            <div>Additional Comments :</div>
+            <div>Owner of Media :</div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          {/* <Button
+            onClick={() => {
+              alert("Inputs Reset");
+              setModalShow(false);
+            }}
+          >
+            Reset
+          </Button> */}
+          <Button onClick={() => setModalShow(false)}>Cancel</Button>
+          {/* <Button onClick={addTheSite}>Create</Button> */}
+        </Modal.Footer>
+      </Modal>
       <div id="garbage"></div>
       {data.length === 0 && <p>No data found</p>}
     </div>

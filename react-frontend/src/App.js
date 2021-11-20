@@ -3,7 +3,7 @@ import Datatable from "./datatable";
 import axios from "axios";
 import ReactDOM from "react-dom";
 import { Button, Modal } from "react-bootstrap";
-import "./modal.css";
+import "./newSiteModal.css";
 // import AddSite from "./modal.js";
 
 require("es6-promise").polyfill();

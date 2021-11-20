@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "../card.css";
+import "../expandSite.css";
 
 export default function Datatable({ data }) {
   // const data_object = [
@@ -13,7 +14,7 @@ export default function Datatable({ data }) {
   const myContainer = useRef(null);
 
   const [priceArray, setPriceArray] = useState([]);
-  var [sumPrice, setSumPrice] = useState(0);
+  const [sumPrice, setSumPrice] = useState(0);
   const [modalShow, setModalShow] = useState(false);
   const [expandedModalData, setExpandedModalData] = useState({});
   const [checkTrueArr, setCheckTrueArr] = useState([
@@ -61,7 +62,7 @@ export default function Datatable({ data }) {
       setPriceArray(priceArrayCopy);
       console.log(priceArray);
 
-      const sumPriceCopy = sumPrice;
+      var sumPriceCopy = sumPrice;
       sumPriceCopy = sumPriceCopy + parseInt(cost);
       setSumPrice(sumPriceCopy);
     }
@@ -96,11 +97,13 @@ export default function Datatable({ data }) {
   function expandCard(cardId) {
     setModalShow(true);
 
+    // setExpandedModalData(data[cardId]);
+    // console.log(expandedModalData);
+
     var expandedModalDataCopy = expandedModalData;
     expandedModalDataCopy = data[cardId];
     setExpandedModalData(expandedModalDataCopy);
-
-    console.log(data[cardId]);
+    console.log(expandedModalData);
   }
 
   return (
@@ -125,7 +128,6 @@ export default function Datatable({ data }) {
                 // id={index}
                 className="media_card"
                 onClick={(e) => {
-                  console.log(e.target.id);
                   expandCard(index);
                 }}
               >
@@ -165,6 +167,7 @@ export default function Datatable({ data }) {
         </div>
       </div>
       <Modal
+        id="expand_site_modal"
         // data={expandedModalData}
         show={modalShow}
         size="lg"
@@ -172,25 +175,43 @@ export default function Datatable({ data }) {
         centered
       >
         <Modal.Body>
-          <img src="/image.jpg" alt="" />
-          <div>
-            {/* <div>Site Code :{data.site_code}</div> */}
-            <div>Sub Environment :</div>
-            <div>State Name :</div>
-            <div>City Name :</div>
-            <div>Location :</div>
-            <div>Traffic Movement :</div>
-            <div>Post Code :</div>
-            <div>Latitude :</div>
-            <div>Longitude :</div>
-            <div>Media Vehicle :</div>
-            <div>Width :</div>
-            <div>Height :</div>
-            <div>Position :</div>
-            <div>Media Type :</div>
-            <div>Display Cost :</div>
-            <div>Additional Comments :</div>
-            <div>Owner of Media :</div>
+          <div className="expand_site_modal_body">
+            <div className="expand_site_modal_body_images">
+              <img src="/image.jpg" alt="" />
+              <img src="/image.jpg" alt="" />
+              <img src="/image.jpg" alt="" />
+            </div>
+            <div className="expand_site_modal_body_site_details">
+              <div>
+                <div>Site Code :{expandedModalData.site_code}</div>
+                <div>Sub Environment :{expandedModalData.sub_environment}</div>
+                <div>State Name :{expandedModalData.state_name}</div>
+                <div>City Name :{expandedModalData.city_name}</div>
+                <div>Location :{expandedModalData.location}</div>
+                <div>
+                  Traffic Movement :{expandedModalData.traffic_movement}
+                </div>
+                <div>Post Code :{expandedModalData.post_code}</div>
+                <div>Latitude :{expandedModalData.latitude}</div>
+                <div>Longitude :{expandedModalData.longitude}</div>
+              </div>
+              <div>
+                <div>Media Vehicle :{expandedModalData.media_vehicle}</div>
+                <div>Width :{expandedModalData.size_w}</div>
+                <div>Height :{expandedModalData.size_h}</div>
+                <div>Position :{expandedModalData.position}</div>
+                <div>Media Type :{expandedModalData.media_type}</div>
+                <div>Display Cost :{expandedModalData.display_cost}</div>
+                <div>
+                  Additional Comments :
+                  {expandedModalData.additional_size_comments}
+                </div>
+                <div>
+                  Printing Material :{expandedModalData.printing_material}
+                </div>
+                <div>Owner of Media :{expandedModalData.owner_of_media}</div>
+              </div>
+            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>

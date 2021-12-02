@@ -63,18 +63,14 @@ export default function App() {
   }
 
   function clickclick() {
-    var siteCode = site.split(" ").join("&");
+    var siteCode = site;
+    // .split(" ").join("&");
     var cityName = city.split(" ").join("&");
     var location = loc.split(" ").join("&");
     // console.log(loc.split(" ").join("&"));
     axios
       .get(
-        "/media/?site_code=" +
-          siteCode +
-          "&city_name=" +
-          cityName +
-          "&location=" +
-          location
+        "/media/?site_code=" + site + "&city_name=" + city + "&location=" + loc
       )
       .then((response) => {
         if (response.data == "") {
@@ -91,6 +87,25 @@ export default function App() {
           console.log("Filtered data :");
           console.log(response.data);
         }
+      });
+  }
+
+  function deleteSite() {
+    var siteCode = site.split(" ").join("&");
+    var cityName = city.split(" ").join("&");
+    var location = loc.split(" ").join("&");
+    // console.log(loc.split(" ").join("&"));
+    axios
+      .delete(
+        "/media/?site_code=" +
+          siteCode +
+          "&city_name=" +
+          cityName +
+          "&location=" +
+          location
+      )
+      .then((response) => {
+        console.log(response);
       });
   }
 
@@ -128,21 +143,29 @@ export default function App() {
           type="text"
           value={site}
           onChange={(e) => setSite(e.target.value)}
+          placeholder="site"
         />
         <input
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          placeholder="city"
         />
         <input
           type="text"
           value={loc}
           onChange={(e) => setLoc(e.target.value)}
+          placeholder="location"
         />
-        <button onClick={clickclick}>clickclick</button>
-        <button onClick={clickclick}>Delete a site</button>
+        <Button onClick={clickclick}>Get filtered sites</Button>
+        <Button onClick={deleteSite}>Delete a site</Button>
         {/* <button onClick={showModal}>Add a site</button> */}
-        <Button onClick={() => setModalShow(true)}>Open</Button>
+        <Button onClick={() => setModalShow(true)}>Add a site</Button>
+        <Button onClick={() => alert("Sites added to campaign")}>
+          Add to campaign
+        </Button>
+        <label>Upload photos : </label>
+        <input type="file"></input>
         {/* <Modal show={modalShow}>
           <Modal.Header>Header</Modal.Header>
           <Modal.Body>Hello Body</Modal.Body>

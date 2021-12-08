@@ -16,6 +16,7 @@ export default function App() {
   const [loc, setLoc] = useState("");
   const [apiRes, setApiRes] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [csv, setCsv] = useState();
   const [newSite, setNewSite] = useState({
     site_code: "",
     sub_environment: "",
@@ -97,12 +98,7 @@ export default function App() {
     // console.log(loc.split(" ").join("&"));
     axios
       .delete(
-        "/media/?site_code=" +
-          siteCode +
-          "&city_name=" +
-          cityName +
-          "&location=" +
-          location
+        "/media/?site_code=" + site + "&city_name=" + city + "&location=" + loc
       )
       .then((response) => {
         console.log(response);
@@ -124,6 +120,33 @@ export default function App() {
     // console.log(getValue);
   };
 
+  const sendImage = (event) => {
+    console.log("Hey");
+  };
+
+  // send a POST request
+  // axios({
+  //   method: "post",
+  //   url: "/uploadCSV",
+
+  //   data,
+  // });
+
+  const sendCSV = (event) => {
+    const data = new FormData();
+    data.append("file", csv);
+    console.log("Hey");
+    console.log(data);
+    axios
+      .post("http://localhost:5000/uploadCSV", data)
+      .then((res) => {
+        // res.set('Access-Control-Allow-Origin', '*');
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   // useEffect(() => {
   //   function captureResponse(e, inputResponse, id) {
   //     console.log(inputResponse);
@@ -166,6 +189,18 @@ export default function App() {
         </Button>
         <label>Upload photos : </label>
         <input type="file"></input>
+        <Button onClick={sendImage}>Upload Image</Button>
+        <lable htmlFor="file"></lable>
+        <input
+          type="file"
+          accept=".csv"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            console.log(file);
+            setCsv(file);
+          }}
+        ></input>
+        <Button onClick={sendCSV}>Upload CSV</Button>
         {/* <Modal show={modalShow}>
           <Modal.Header>Header</Modal.Header>
           <Modal.Body>Hello Body</Modal.Body>

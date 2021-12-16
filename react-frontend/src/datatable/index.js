@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import "../card.css";
 import "../expandSite.css";
 
-export default function Datatable({ data }) {
+export default function Datatable({ data, images }) {
   // const data_object = [
   //   {site_code: data.site_code},
   //   {location: data.location},
@@ -16,6 +16,7 @@ export default function Datatable({ data }) {
   const [priceArray, setPriceArray] = useState([]);
   const [sumPrice, setSumPrice] = useState(0);
   const [modalShow, setModalShow] = useState(false);
+  const [idOfCard, setIdOfCard] = useState(0);
   const [expandedModalData, setExpandedModalData] = useState({});
   const [checkTrueArr, setCheckTrueArr] = useState([
     false,
@@ -97,6 +98,8 @@ export default function Datatable({ data }) {
   function expandCard(cardId) {
     setModalShow(true);
 
+    setIdOfCard(cardId + 1);
+
     // setExpandedModalData(data[cardId]);
     // console.log(expandedModalData);
 
@@ -104,6 +107,7 @@ export default function Datatable({ data }) {
     expandedModalDataCopy = data[cardId];
     setExpandedModalData(expandedModalDataCopy);
     console.log(expandedModalData);
+    console.log(images);
   }
 
   return (
@@ -125,13 +129,13 @@ export default function Datatable({ data }) {
                 // onChange={ifChecked}
               />
               <div
-                // id={index}
+                // id={rows.site_code}
                 className="media_card"
                 onClick={(e) => {
                   expandCard(index);
                 }}
               >
-                <img src="/image.jpg" alt="" />
+                <img className="image" src="/image.jpg" alt="" />
                 <div>
                   <div className="card_details">
                     Site Code: {rows.site_code}
@@ -177,9 +181,12 @@ export default function Datatable({ data }) {
         <Modal.Body>
           <div className="expand_site_modal_body">
             <div className="expand_site_modal_body_images">
-              <img src="/image.jpg" alt="" />
-              <img src="/image.jpg" alt="" />
-              <img src="/image.jpg" alt="" />
+              {images[idOfCard].map((image) => (
+                <img src={image} />
+              ))}
+              {/* <img className="image" src="/image.jpg" alt="" />
+              <img className="image" src="/image.jpg" alt="" />
+              <img className="image" src="/image.jpg" alt="" /> */}
             </div>
             <div className="expand_site_modal_body_site_details">
               <div>

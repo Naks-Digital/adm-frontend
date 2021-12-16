@@ -17,6 +17,7 @@ export default function App() {
   const [apiRes, setApiRes] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [csv, setCsv] = useState();
+  const [images, setImages] = useState([[]]);
   const [newSite, setNewSite] = useState({
     site_code: "",
     sub_environment: "",
@@ -49,6 +50,30 @@ export default function App() {
       setData(response.data);
       console.log("Whole data :");
       console.log(response.data);
+      // console.log(response.data[15].site_image);
+      const imagesCopy = images;
+      response.data.map((row) => {
+        console.log(row.site_image);
+        if (row.site_image != null) {
+          var imageArray = row.site_image;
+          for (var i = 0; i < imageArray.length; i++) {
+            imageArray[i] = imageArray[i].split("/").join("\\");
+          }
+          imagesCopy.push(imageArray);
+          console.log(imageArray);
+        }
+        setImages(imagesCopy);
+        console.log(imagesCopy);
+      });
+      // if (response.data[15].site_image != null) {
+      //   var imageArray = response.data[15].site_image;
+      //   for (var i = 0; i < imageArray.length; i++) {
+      //     imageArray[i] = imageArray[i].split("/").join("\\");
+      //   }
+      //   // var formattedImage = response.data[15].site_image + "";
+      //   // formattedImage = formattedImage.split("/").join("\\");
+      //   setImages(imageArray);
+      // }
     });
   }, []);
 
@@ -121,16 +146,20 @@ export default function App() {
   };
 
   const sendImage = (event) => {
+    const data = new FormData();
+    data.append("image", images);
     console.log("Hey");
+    console.log(data);
+    axios
+      .post("http://localhost:5000/uploadImage", data)
+      .then((res) => {
+        // res.set('Access-Control-Allow-Origin', '*');
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
-  // send a POST request
-  // axios({
-  //   method: "post",
-  //   url: "/uploadCSV",
-
-  //   data,
-  // });
 
   const sendCSV = (event) => {
     const data = new FormData();
@@ -138,7 +167,13 @@ export default function App() {
     console.log("Hey");
     console.log(data);
     axios
-      .post("http://localhost:5000/uploadCSV", data)
+      .post(
+        "http://localhost:5000/uploadCSV",
+        data
+        // , {
+        //   headers: { "Content-Type": "text/csv" },
+        // }
+      )
       .then((res) => {
         // res.set('Access-Control-Allow-Origin', '*');
         console.log(res);
@@ -188,7 +223,15 @@ export default function App() {
           Add to campaign
         </Button>
         <label>Upload photos : </label>
-        <input type="file"></input>
+        {/* <input
+          type="file"
+          accept=".png"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            console.log(file);
+            setImages(file);
+          }}
+        ></input> */}
         <Button onClick={sendImage}>Upload Image</Button>
         <lable htmlFor="file"></lable>
         <input
@@ -201,6 +244,13 @@ export default function App() {
           }}
         ></input>
         <Button onClick={sendCSV}>Upload CSV</Button>
+        <a
+          href="https://github.com/Naks-Digital/Sample-CSV-file/blob/master/data%20-%20Sheet1.csv"
+          target="_blank"
+          download
+        >
+          Sample file
+        </a>
         {/* <Modal show={modalShow}>
           <Modal.Header>Header</Modal.Header>
           <Modal.Body>Hello Body</Modal.Body>
@@ -387,7 +437,7 @@ export default function App() {
         </Modal>
       </div>
       <div>
-        <Datatable data={apiRes == "" ? data : apiRes} />
+        <Datatable data={apiRes == "" ? data : apiRes} images={images} />
         {/* <Datatable data={apiRes == "" ? search(data) : search(apiRes)} /> */}
       </div>
     </div>

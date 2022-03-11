@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import * as ReactBootStrap from "react-bootstrap";
+// import "./fetch_from_api.css";
 
 export default class FetchRandomUser extends Component {
   constructor() {
@@ -23,23 +24,23 @@ export default class FetchRandomUser extends Component {
   renderData = (siteData, index) => {
     return (
       <tr key={index}>
-        <td>{siteData.siteCode}</td>
-        <td>{siteData.subEnvironment}</td>
-        <td>{siteData.stateName}</td>
-        <td>{siteData.cityName}</td>
-        <td>{siteData.Location}</td>
-        <td>{siteData.trafficMovement}</td>
-        <td>{siteData.postCode}</td>
-        <td>{siteData.Latitude}</td>
-        <td>{siteData.Longitude}</td>
-        <td>{siteData.mediaVehicle}</td>
-        <td>{siteData.sizeW}</td>
-        <td>{siteData.sizeH}</td>
-        <td>{siteData.Position}</td>
-        <td>{siteData.mediaType}</td>
-        <td>{siteData.displayCost}</td>
-        <td>{siteData.printingMaterial}</td>
-        </tr>
+        <td>{siteData.site_code}</td>
+        <td>{siteData.sub_environment}</td>
+        <td>{siteData.state_name}</td>
+        <td>{siteData.city_name}</td>
+        <td>{siteData.location}</td>
+        <td>{siteData.traffic_movement}</td>
+        <td>{siteData.post_code}</td>
+        <td>{siteData.latitude}</td>
+        <td>{siteData.longitude}</td>
+        <td>{siteData.media_vehicle}</td>
+        <td>{siteData.size_w}</td>
+        <td>{siteData.size_h}</td>
+        <td>{siteData.position}</td>
+        <td>{siteData.media_type}</td>
+        <td>{siteData.display_cost}</td>
+        <td>{siteData.printing_material}</td>
+      </tr>
     );
   };
 

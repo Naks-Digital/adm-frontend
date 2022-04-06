@@ -12,6 +12,7 @@ require("isomorphic-fetch");
 export default function App() {
   const [data, setData] = useState([]);
   const [site, setSite] = useState("");
+  const [siteCode, setSiteCode] = useState("");
   const [city, setCity] = useState("");
   const [loc, setLoc] = useState("");
   const [apiRes, setApiRes] = useState([]);
@@ -50,7 +51,6 @@ export default function App() {
       setData(response.data);
       console.log("Whole data :");
       console.log(response.data);
-      // console.log(response.data[15].site_image);
       const imagesCopy = images;
       response.data.map((row) => {
         console.log(row.site_image);
@@ -63,7 +63,7 @@ export default function App() {
           console.log(imageArray);
         }
         setImages(imagesCopy);
-        console.log(imagesCopy);
+        console.log("imagesCopy" + imagesCopy);
       });
       // if (response.data[15].site_image != null) {
       //   var imageArray = response.data[15].site_image;
@@ -88,12 +88,11 @@ export default function App() {
       .catch((error) => console.log(error));
   }
 
-  function clickclick() {
+  function getFilteredSites() {
     var siteCode = site;
     // .split(" ").join("&");
     var cityName = city.split(" ").join("&");
     var location = loc.split(" ").join("&");
-    // console.log(loc.split(" ").join("&"));
     axios
       .get(
         "/media/?site_code=" + site + "&city_name=" + city + "&location=" + loc
@@ -120,7 +119,6 @@ export default function App() {
     var siteCode = site.split(" ").join("&");
     var cityName = city.split(" ").join("&");
     var location = loc.split(" ").join("&");
-    // console.log(loc.split(" ").join("&"));
     axios
       .delete(
         "/media/?site_code=" + site + "&city_name=" + city + "&location=" + loc
@@ -141,17 +139,16 @@ export default function App() {
     console.log(event.target.value);
     console.log(copyObj);
     setNewSite({ ...copyObj });
-
-    // console.log(getValue);
   };
 
   const sendImage = (event) => {
     const data = new FormData();
+    console.log("site code...." + siteCode);
     data.append("image", images);
-    console.log("Hey");
-    console.log(data);
+    // data.append("site", siteCode);
+    console.log(data.get("image"));
     axios
-      .post("http://localhost:5000/uploadImage", data)
+      .post("http://localhost:5000/uploadImage?site_code=" + siteCode, data)
       .then((res) => {
         // res.set('Access-Control-Allow-Origin', '*');
         console.log(res);
@@ -215,25 +212,35 @@ export default function App() {
           onChange={(e) => setLoc(e.target.value)}
           placeholder="location"
         />
-        <Button onClick={clickclick}>Get filtered sites</Button>
+        <Button onClick={getFilteredSites}>Get filtered sites</Button>
         <Button onClick={deleteSite}>Delete a site</Button>
         {/* <button onClick={showModal}>Add a site</button> */}
+        <br />
         <Button onClick={() => setModalShow(true)}>Add a site</Button>
         <Button onClick={() => alert("Sites added to campaign")}>
           Add to campaign
         </Button>
+        <br />
         <label>Upload photos : </label>
-        {/* <input
+        <input
           type="file"
           accept=".png"
           onChange={(event) => {
             const file = event.target.files[0];
-            console.log(file);
+            console.log("file" + file);
             setImages(file);
+            console.log("setImages" + images);
           }}
-        ></input> */}
+        ></input>
+        <input
+          type="text"
+          value={siteCode}
+          onChange={(e) => setSiteCode(e.target.value)}
+          placeholder="site code"
+        />
         <Button onClick={sendImage}>Upload Image</Button>
-        <lable htmlFor="file"></lable>
+        <br />
+        <lable htmlFor="file">Upload CSV File : </lable>
         <input
           type="file"
           accept=".csv"
@@ -244,6 +251,7 @@ export default function App() {
           }}
         ></input>
         <Button onClick={sendCSV}>Upload CSV</Button>
+        <br />
         <a
           href="https://github.com/Naks-Digital/Sample-CSV-file/blob/master/data%20-%20Sheet1.csv"
           target="_blank"

@@ -112,7 +112,6 @@ export default function Datatable({ data, images }) {
 
   return (
     <div>
-      <div id="empty_response"></div>
       <div className="parent_cards_total">
         <div id="all_cards">
           {data.map((rows, index) => (
@@ -181,9 +180,9 @@ export default function Datatable({ data, images }) {
         <Modal.Body>
           <div className="expand_site_modal_body">
             <div className="expand_site_modal_body_images">
-              {images[idOfCard].map((image) => (
+              {/* {images[idOfCard].map((image) => (
                 <img src={image} />
-              ))}
+              ))} */}
               {/* <img className="image" src="/image.jpg" alt="" />
               <img className="image" src="/image.jpg" alt="" />
               <img className="image" src="/image.jpg" alt="" /> */}

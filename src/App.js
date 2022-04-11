@@ -4,6 +4,8 @@ import axios from "axios";
 import ReactDOM from "react-dom";
 import { Button, Modal } from "react-bootstrap";
 import "./newSiteModal.css";
+import ResponsiveDrawer from "./navigation/nav_bar.js";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import AddSite from "./modal.js";
 
 require("es6-promise").polyfill();
@@ -193,6 +195,12 @@ export default function App() {
 
   return (
     <div>
+      <Router>
+        <ResponsiveDrawer />
+        <Routes>
+          <Route path="/" />
+        </Routes>
+      </Router>
       <div>
         <input
           type="text"

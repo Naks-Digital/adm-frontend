@@ -144,8 +144,11 @@ export default function Datatable({ data, images }) {
                     Media Type: {rows.media_type}
                   </div>
                 </div>
-                <div className="card_details">
-                  Price per month: {rows.display_cost}
+                <div>
+                  <div className="card_details">
+                    Price per month: {rows.display_cost}
+                  </div>
+                  <Button>Add to campaign</Button>
                 </div>
               </div>
             </div>
@@ -160,7 +163,7 @@ export default function Datatable({ data, images }) {
             </p>
           ))}
           <br />
-          Estimated price: {sumPrice}
+          Estimated Price: {sumPrice}
           {/* <p>
             {priceArray.map((onePrice) => {
               sumPrice = sumPrice + parseInt(onePrice);
@@ -180,9 +183,9 @@ export default function Datatable({ data, images }) {
         <Modal.Body>
           <div className="expand_site_modal_body">
             <div className="expand_site_modal_body_images">
-              {/* {images[idOfCard].map((image) => (
+              {images[idOfCard].map((image) => (
                 <img src={image} />
-              ))} */}
+              ))}
               {/* <img className="image" src="/image.jpg" alt="" />
               <img className="image" src="/image.jpg" alt="" />
               <img className="image" src="/image.jpg" alt="" /> */}
@@ -239,3 +242,7 @@ export default function Datatable({ data, images }) {
   );
 }
 // use redux
+
+// trying to fix the parameter passing, calling images to be displayed, giving an option on each tile to add that site to a campaign.
+
+// wp php - turn off a flag to server content on https, - 

@@ -107,7 +107,7 @@ export default function Datatable({ data, images }) {
     expandedModalDataCopy = data[cardId];
     setExpandedModalData(expandedModalDataCopy);
     console.log(expandedModalData);
-    console.log(images);
+    console.log("CHECKING FOR THE IMAGE PATH DATATABLE" + images);
   }
 
   return (
@@ -135,6 +135,7 @@ export default function Datatable({ data, images }) {
                 }}
               >
                 <img className="image" src="/image.jpg" alt="" />
+                {/* <img className="image" src="/resources/logo192.png" alt="" /> */}
                 <div>
                   <div className="card_details">
                     Site Code: {rows.site_code}
@@ -184,7 +185,10 @@ export default function Datatable({ data, images }) {
           <div className="expand_site_modal_body">
             <div className="expand_site_modal_body_images">
               {images[idOfCard].map((image) => (
-                <img src={image} />
+                <div>
+                  <img src={image} />
+                  {image}
+                </div>
               ))}
               {/* <img className="image" src="/image.jpg" alt="" />
               <img className="image" src="/image.jpg" alt="" />
@@ -245,4 +249,4 @@ export default function Datatable({ data, images }) {
 
 // trying to fix the parameter passing, calling images to be displayed, giving an option on each tile to add that site to a campaign.
 
-// wp php - turn off a flag to server content on https, - 
+// wp php - turn off a flag to server content on https, -

@@ -5,25 +5,31 @@ export default function Home() {
   return (
     <>
       <div className="home_parent">
-        <div className="campaign_tile">
+        <div className="ongoing">
           <div>
-            <h1>Create campaigns and schedule them</h1>
+            <h3>Ongoing campaigns</h3>
           </div>
+          <ol>
+            <li>Campaign 1</li>
+            <li>Campaign 2</li>
+            <li>Campaign 3</li>
+            <li>Campaign 4</li>
+            <li>Campaign 5</li>
+            <li>Campaign 6</li>
+            <li>Campaign 7</li>
+          </ol>
         </div>
-        <div className="photographs_tile">
+        <div className="upcoming">
           <div>
-            <h1>See all the photographs of media at one place</h1>
+            <h3>Upcoming campaigns</h3>
           </div>
-        </div>
-        <div className="site_tile">
-          <div>
-            <h1>See details of all sites</h1>
-          </div>
-        </div>
-        <div className="profile_tile">
-          <div>
-            <h1>Create and edit profile</h1>
-          </div>
+          <ol>
+            <li>Campaign 1</li>
+            <li>Campaign 2</li>
+            <li>Campaign 3</li>
+            <li>Campaign 4</li>
+            <li>Campaign 5</li>
+          </ol>
         </div>
       </div>
     </>

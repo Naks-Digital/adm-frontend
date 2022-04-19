@@ -187,7 +187,6 @@ export default function Datatable({ data, images }) {
               {images[idOfCard].map((image) => (
                 <div>
                   <img src={image} />
-                  {image}
                 </div>
               ))}
               {/* <img className="image" src="/image.jpg" alt="" />

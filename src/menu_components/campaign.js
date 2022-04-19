@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import "./campaign.css";
 import EditIcon from "@mui/icons-material/Edit";
 import { Modal, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import CreateCampaign from "../modals/create_campaign.js";
+import DeleteCampaign from "../modals/delete_campaign";
 // import CreateCampaign from "../modals/create_campaign";
 
 export default function Campaign() {
-  const [createCampaignModalShow, setCreateCampaignModalShow] = useState(false);
-  const [deleteCampaignModalShow, setDeleteCampaignModalShow] = useState(false);
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   function createCampaign() {
-    setCreateCampaignModalShow(!createCampaignModalShow);
+    dispatch({ type: "CREATEHIDE" });
   }
 
   function deleteCampaign() {
-    setDeleteCampaignModalShow(!deleteCampaignModalShow);
+    dispatch({ type: "DELETEHIDE" });
   }
 
   return (
@@ -64,13 +67,13 @@ export default function Campaign() {
       <div className="campaign_buttons">
         <Button
           style={{ backgroundColor: "#274776" }}
-          onClick={() => setDeleteCampaignModalShow(true)}
+          onClick={() => dispatch({ type: "DELETESHOW" })}
         >
           Delete
         </Button>
         <Button
           style={{ backgroundColor: "#274776" }}
-          onClick={() => setCreateCampaignModalShow(true)}
+          onClick={() => dispatch({ type: "CREATESHOW" })}
         >
           Create
         </Button>
@@ -141,127 +144,8 @@ export default function Campaign() {
           </tbody>
         </table>
       </div>
-      <Modal
-        show={createCampaignModalShow}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        {/* <Modal.Header>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Add a site
-          </Modal.Title>
-        </Modal.Header> */}
-        <Modal.Body>
-          <div className="campaign_inputs">
-            <div>
-              <div>
-                <label>Name the Campaign : </label>
-                <input
-                  type="text"
-                  // id="site_code"
-                  // value={}
-                  // onChange={}
-                ></input>
-              </div>
-              <div>
-                <label>Start Date : </label>
-                <input
-                  type="text"
-                  // id="sub_environment"
-                  // onChange={}
-                ></input>
-              </div>
-              <div>
-                <label>End Date : </label>
-                <input
-                  type="text"
-                  // id="state_name"
-                  // onChange={}
-                ></input>
-              </div>
-              <div>
-                <label>Total Price Cap : </label>
-                <input
-                  type="text"
-                  // id="city_name"
-                  // onChange={}
-                ></input>
-              </div>
-            </div>
-            <div>
-              <div>
-                <label>No. of Sites : </label>
-                <input
-                  type="text"
-                  // id="location"
-                  // onChange={}
-                ></input>
-              </div>
-              <div>
-                <label>Select Sites : </label>
-                <input
-                  type="text"
-                  // id="traffic_movement"
-                  // onChange={}
-                ></input>
-              </div>
-              <div>
-                <label>Add extra photographs : </label>
-                <input
-                  type="text"
-                  // id="post_code"
-                  // onChange={}
-                ></input>
-              </div>
-              <div>
-                <label>Select from existing Campaigns : </label>
-                <input
-                  type="text"
-                  // id="latitude"
-                  // onChange={}
-                ></input>
-              </div>
-            </div>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            onClick={() => {
-              alert("Inputs Reset");
-              setCreateCampaignModalShow(false);
-            }}
-          >
-            Reset
-          </Button>
-          <Button onClick={() => setCreateCampaignModalShow(false)}>
-            Cancel
-          </Button>
-          <Button onClick={createCampaign}>Create</Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal
-        show={deleteCampaignModalShow}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Body>DELETE</Modal.Body>
-        <Modal.Footer>
-          <Button
-            onClick={() => {
-              alert("Inputs Reset");
-              setDeleteCampaignModalShow(false);
-            }}
-          >
-            Reset
-          </Button>
-          <Button onClick={() => setDeleteCampaignModalShow(false)}>
-            Cancel
-          </Button>
-          <Button onClick={deleteCampaign}>Create</Button>
-        </Modal.Footer>
-      </Modal>
+      <CreateCampaign />
+      <DeleteCampaign />
     </>
   );
 }

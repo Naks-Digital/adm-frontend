@@ -8,16 +8,18 @@ import Photographs from "./menu_components/photographs.js";
 import Profile from "./menu_components/profile.js";
 import Settings from "./menu_components/settings.js";
 import Site from "./menu_components/site.js";
+// import RootReducer from "./root_reducer.js";
 // import AddSite from "./modal.js";
 
 require("es6-promise").polyfill();
 require("isomorphic-fetch");
 
 export default function App() {
+
   return (
     <div>
       <Router>
-        <ResponsiveDrawer/>
+        <ResponsiveDrawer />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/campaign" element={<Campaign />} />

@@ -10,7 +10,7 @@ export default function Photographs() {
     <>
       <div>
         <h1>PHOTOGRAPHS</h1>
-        <img src="/resources/logo192.png" />
+        {/* <img src="/resources/logo192.png" /> */}
         {state.siteImages.map((images) =>
           images.map((image) => (
             <div>

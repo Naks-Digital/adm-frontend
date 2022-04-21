@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Datatable from "./datatable/index.js";
-import axios from "axios";
+// import React, { useState, useEffect } from "react";
+// import Datatable from "./datatable/index.js";
+// import axios from "axios";
 import "./newSiteModal.css";
 
 const initialState = {

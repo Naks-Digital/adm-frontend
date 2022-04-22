@@ -1,0 +1,27 @@
+.ep_subsections {
+  display: grid;
+  margin: 2%;
+}
+
+label {
+  margin: 1%;
+}
+
+input {
+  height: 50px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+select {
+  height: 50px;
+  border: 2px #767676;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.ep_subsections_btn {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}

@@ -66,13 +66,13 @@ export default function Campaign() {
       </div>
       <div className="campaign_buttons">
         <Button
-          style={{ backgroundColor: "#274776" }}
+          style={{ backgroundColor: "#274776", width: "40%" }}
           onClick={() => dispatch({ type: "DELETESHOW" })}
         >
           Delete
         </Button>
         <Button
-          style={{ backgroundColor: "#274776" }}
+          style={{ backgroundColor: "#274776", width: "40%" }}
           onClick={() => dispatch({ type: "CREATESHOW" })}
         >
           Create
@@ -89,6 +89,7 @@ export default function Campaign() {
               <th>Start Date</th>
               <th>End Date</th>
               <th>Price</th>
+              <th>Status</th>
               <th></th>
             </tr>
           </thead>
@@ -101,6 +102,7 @@ export default function Campaign() {
               <td>April</td>
               <td>May</td>
               <td>700000</td>
+              <td>Drafted</td>
               <td>
                 <EditIcon />
               </td>
@@ -113,6 +115,7 @@ export default function Campaign() {
               <td>April</td>
               <td>May</td>
               <td>700000</td>
+              <td>Scheduled</td>
               <td>
                 <EditIcon />
               </td>
@@ -125,6 +128,7 @@ export default function Campaign() {
               <td>April</td>
               <td>May</td>
               <td>700000</td>
+              <td>Active</td>
               <td>
                 <EditIcon />
               </td>
@@ -137,6 +141,7 @@ export default function Campaign() {
               <td>April</td>
               <td>May</td>
               <td>700000</td>
+              <td>Expired/Completed</td>
               <td>
                 <EditIcon />
               </td>

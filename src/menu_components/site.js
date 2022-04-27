@@ -2,18 +2,30 @@ import React, { useState, useEffect } from "react";
 import Datatable from "../datatable";
 import axios from "axios";
 import "../newSiteModal.css";
+import ReactDOM from "react-dom";
 
 require("es6-promise").polyfill();
 require("isomorphic-fetch");
 
 export default function Site() {
   const [data, setData] = useState([]);
-  const [apiRes, setApiRes] = useState([]);
+  const [wholeData, setWholeData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  // const [apiRes, setApiRes] = useState([]);
   const [images, setImages] = useState([[]]);
+  const [site, setSite] = useState("");
+  // const [siteCode, setSiteCode] = useState("");
+  const [city, setCity] = useState("");
+  const [loc, setLoc] = useState("");
 
   useEffect(() => {
+    getWholeData();
+  }, []);
+
+  function getWholeData() {
     axios.get("/media").then((response) => {
       setData(response.data);
+      // setWholeData(response.data);
       console.log("Whole data :");
       console.log(response.data);
       const imagesCopy = images;
@@ -34,11 +46,60 @@ export default function Site() {
         console.log("imagesCopy" + imagesCopy);
       });
     });
-  }, []);
+  }
+
+  function getFilteredSites() {
+    var siteCode = site.split(" ").join("");
+    // .split(" ").join("&");
+    var cityName = city.split(" ").join("&");
+    var location = loc.split(" ").join("&");
+    axios
+      .get(
+        "/media/?site_code=" + site + "&city_name=" + city + "&location=" + loc
+      )
+      .then((response) => {
+        if (response.data == "") {
+          // alert("Got nothing");
+          const element = (
+            <h1>
+              Couldn't get data from the given keywords. You can see the whole
+              data below.
+            </h1>
+          );
+          ReactDOM.render(element, document.getElementById("empty_response"));
+        } else {
+          setData(response.data);
+          // setFilteredData(response.data);
+          console.log("Filtered data :");
+          console.log(response.data);
+        }
+      });
+  }
 
   return (
     <div>
       <div>
+        <input
+          type="text"
+          value={site}
+          onChange={(e) => setSite(e.target.value)}
+          placeholder="site"
+        />
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="city"
+        />
+        <input
+          type="text"
+          value={loc}
+          onChange={(e) => setLoc(e.target.value)}
+          placeholder="location"
+        />
+        <button onClick={getFilteredSites}>Get filtered sites</button>
+        <button onClick={getWholeData}>X</button>
+
         <Datatable data={data} images={images} />
       </div>
     </div>

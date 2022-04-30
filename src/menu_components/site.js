@@ -3,11 +3,16 @@ import Datatable from "../datatable";
 import axios from "axios";
 import "../newSiteModal.css";
 import ReactDOM from "react-dom";
+import { useSelector, useDispatch } from "react-redux";
+import AddSite from "../modals/add_site.js";
 
 require("es6-promise").polyfill();
 require("isomorphic-fetch");
 
 export default function Site() {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const [data, setData] = useState([]);
   const [wholeData, setWholeData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -43,6 +48,7 @@ export default function Site() {
           console.log(imageArray);
         }
         setImages(imagesCopy);
+        // state.siteImages.push(imagesCopy);
         console.log("imagesCopy" + imagesCopy);
       });
     });
@@ -97,10 +103,15 @@ export default function Site() {
           onChange={(e) => setLoc(e.target.value)}
           placeholder="location"
         />
-        <button onClick={getFilteredSites}>Get filtered sites</button>
+        <button onClick={getFilteredSites}>Apply filters</button>
         <button onClick={getWholeData}>X</button>
 
+        <button onClick={() => dispatch({ type: "ADDSITESHOW" })}>
+          Add a site
+        </button>
+
         <Datatable data={data} images={images} />
+        <AddSite />
       </div>
     </div>
   );

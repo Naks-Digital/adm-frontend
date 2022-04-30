@@ -17,36 +17,38 @@ require("isomorphic-fetch");
 const initialState = {
   createModalShow: false,
   deleteModalShow: false,
+  addSiteModalShow: false,
+  canPost: true,
   siteImages: [],
   // component: "",
 };
 
 // window.onload = function Neww() {
-function Neww() {
-  useEffect(() => {
-    axios.get("/media").then((response) => {
-      const siteImagesCopy = initialState.siteImages;
-      response.data.map((row) => {
-        console.log("without split" + row.site_image);
-        if (row.site_image != null) {
-          var imageArray = row.site_image;
-          for (var i = 0; i < imageArray.length; i++) {
-            imageArray[i] = imageArray[i].split(" ").join("%20");
-            var a = imageArray[i].split("public");
-            console.log("imageArray[i]" + a[1]);
-            imageArray[i] = a[1];
-          }
-          siteImagesCopy.push(imageArray);
-        }
-        console.log("siteImagesCopy" + siteImagesCopy);
-      });
-      return {
-        ...initialState,
-        siteImages: [...initialState.siteImages, siteImagesCopy],
-      };
-    });
-  }, []);
-}
+// function Neww() {
+//   useEffect(() => {
+//     axios.get("/media").then((response) => {
+//       const siteImagesCopy = initialState.siteImages;
+//       response.data.map((row) => {
+//         console.log("without split" + row.site_image);
+//         if (row.site_image != null) {
+//           var imageArray = row.site_image;
+//           for (var i = 0; i < imageArray.length; i++) {
+//             imageArray[i] = imageArray[i].split(" ").join("%20");
+//             var a = imageArray[i].split("public");
+//             console.log("imageArray[i]" + a[1]);
+//             imageArray[i] = a[1];
+//           }
+//           siteImagesCopy.push(imageArray);
+//         }
+//         console.log("siteImagesCopy" + siteImagesCopy);
+//       });
+//       return {
+//         ...initialState,
+//         siteImages: [...initialState.siteImages, siteImagesCopy],
+//       };
+//     });
+//   }, []);
+// }
 
 export default function RootReducer(state = initialState, { type, payload }) {
   switch (type) {
@@ -58,6 +60,12 @@ export default function RootReducer(state = initialState, { type, payload }) {
       return { deleteModalShow: true };
     case "DELETEHIDE":
       return { deleteModalShow: false };
+    case "ADDSITESHOW":
+      return { addSiteModalShow: true };
+    case "ADDSITEHIDE":
+      return { addSiteModalShow: false };
+    case "CANPOST":
+      return { canPost: false };
     case "PUTIMAGES":
       return { ...state, siteImages: [...state.siteImages] };
     // case "ACCOUNT_OVERVIEW":

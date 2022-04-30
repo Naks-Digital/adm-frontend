@@ -48,20 +48,11 @@ export default function Datatable({ data, images }) {
   ]);
 
   function ifChecked(checkedId, cost) {
-    // const checkTrueArrCopy = checkTrueArr;
-    // checkTrueArrCopy[checkedId] = true;
-    // setCheckTrueArr(checkTrueArrCopy);
-
-    // const priceDetailsCopy = priceArray;
-    // priceDetailsCopy.push(cost);
-    // setPriceArray(priceDetailsCopy);
-
-    // setPriceHtml(cost);
     const priceArrayCopy = priceArray;
     if (priceArrayCopy[checkedId] == null) {
       priceArrayCopy[checkedId] = cost;
       setPriceArray(priceArrayCopy);
-      console.log(priceArray);
+      console.log("price array " + priceArray);
 
       var sumPriceCopy = sumPrice;
       sumPriceCopy = sumPriceCopy + parseInt(cost);
@@ -69,39 +60,10 @@ export default function Datatable({ data, images }) {
     }
   }
 
-  // function ifChecked(e) {
-  //   // const checkTrueArrCopy = checkTrueArr;
-  //   // checkTrueArrCopy[checkedId] = true;
-  //   // setCheckTrueArr(checkTrueArrCopy);
-
-  //   // const priceDetailsCopy = priceArray;
-  //   // priceDetailsCopy.push(cost);
-  //   // setPriceArray(priceDetailsCopy);
-
-  //   // setPriceHtml(cost);
-  //   var checkedId = e.target.id;
-  //   var cost = e.target.cost;
-  //   console.log(cost);
-  //   if (e.target.checked == true) alert("i am checked");
-  //   else alert("i am not checked");
-  //   const priceArrayCopy = priceArray;
-  //   if (priceArrayCopy[checkedId] == null) {
-  //     priceArrayCopy[checkedId] = cost;
-  //     setPriceArray(priceArrayCopy);
-  //     console.log(priceArray);
-
-  //     sumPrice = sumPrice + parseInt(cost);
-  //     setSumPrice(sumPrice);
-  //   }
-  // }
-
   function expandCard(cardId) {
     setModalShow(true);
 
     setIdOfCard(cardId + 1);
-
-    // setExpandedModalData(data[cardId]);
-    // console.log(expandedModalData);
 
     var expandedModalDataCopy = expandedModalData;
     expandedModalDataCopy = data[cardId];
@@ -160,7 +122,7 @@ export default function Datatable({ data, images }) {
           {priceArray.map((onePrice) => (
             <p>
               {onePrice}
-              <br />
+              {/* <br /> */}
             </p>
           ))}
           <br />
@@ -235,6 +197,7 @@ export default function Datatable({ data, images }) {
           >
             Reset
           </Button> */}
+          <Button onClick={() => setModalShow(false)}>Add to campaign</Button>
           <Button onClick={() => setModalShow(false)}>Cancel</Button>
           {/* <Button onClick={addTheSite}>Create</Button> */}
         </Modal.Footer>

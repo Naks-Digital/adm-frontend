@@ -3,6 +3,7 @@ import Datatable from "../datatable";
 import axios from "axios";
 import "../newSiteModal.css";
 import ReactDOM from "react-dom";
+import { Button, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import AddSite from "../modals/add_site.js";
 
@@ -16,9 +17,11 @@ export default function Site() {
   const [data, setData] = useState([]);
   const [wholeData, setWholeData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [siteCode, setSiteCode] = useState("");
   // const [apiRes, setApiRes] = useState([]);
   const [images, setImages] = useState([[]]);
   const [site, setSite] = useState("");
+  const [uploadImages, setUploadImages] = useState([[]]);
   // const [siteCode, setSiteCode] = useState("");
   const [city, setCity] = useState("");
   const [loc, setLoc] = useState("");
@@ -53,6 +56,23 @@ export default function Site() {
       });
     });
   }
+
+  const sendImage = (event) => {
+    const data = new FormData();
+    console.log("site code...." + siteCode);
+    data.append("image", uploadImages);
+    // data.append("site", siteCode);
+    console.log(data.get("image"));
+    axios
+      .post("http://localhost:5000/uploadImage?site_code=" + siteCode, data)
+      .then((res) => {
+        // res.set('Access-Control-Allow-Origin', '*');
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   function getFilteredSites() {
     var siteCode = site.split(" ").join("");
@@ -110,6 +130,25 @@ export default function Site() {
           Add a site
         </button>
 
+        <label>Upload photos : </label>
+        <input
+          type="file"
+          accept=".png"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            console.log("file" + file);
+            setUploadImages(file);
+            console.log("setUploadImages" + uploadImages);
+          }}
+        ></input>
+        <input
+          type="text"
+          value={siteCode}
+          onChange={(e) => setSiteCode(e.target.value)}
+          placeholder="site code"
+        />
+        <Button onClick={sendImage}>Upload Image</Button>
+        <br />
         <Datatable data={data} images={images} />
         <AddSite />
       </div>

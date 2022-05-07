@@ -111,6 +111,10 @@ export default function Datatable({ data, images }) {
                   <div className="card_details">
                     Price per month: {rows.display_cost}
                   </div>
+                  <div className="card_details">
+                    Traffic Direction: {rows.traffic_movement}
+                  </div>
+                  <div className="card_details">Status: {rows.status}</div>
                   <Button>Add to campaign</Button>
                 </div>
               </div>
@@ -184,6 +188,7 @@ export default function Datatable({ data, images }) {
                   Printing Material :{expandedModalData.printing_material}
                 </div>
                 <div>Owner of Media :{expandedModalData.owner_of_media}</div>
+                <div>Status :{expandedModalData.status}</div>
               </div>
             </div>
           </div>

@@ -48,20 +48,11 @@ export default function Datatable({ data, images }) {
   ]);
 
   function ifChecked(checkedId, cost) {
-    // const checkTrueArrCopy = checkTrueArr;
-    // checkTrueArrCopy[checkedId] = true;
-    // setCheckTrueArr(checkTrueArrCopy);
-
-    // const priceDetailsCopy = priceArray;
-    // priceDetailsCopy.push(cost);
-    // setPriceArray(priceDetailsCopy);
-
-    // setPriceHtml(cost);
     const priceArrayCopy = priceArray;
     if (priceArrayCopy[checkedId] == null) {
       priceArrayCopy[checkedId] = cost;
       setPriceArray(priceArrayCopy);
-      console.log(priceArray);
+      console.log("price array " + priceArray);
 
       var sumPriceCopy = sumPrice;
       sumPriceCopy = sumPriceCopy + parseInt(cost);
@@ -69,45 +60,16 @@ export default function Datatable({ data, images }) {
     }
   }
 
-  // function ifChecked(e) {
-  //   // const checkTrueArrCopy = checkTrueArr;
-  //   // checkTrueArrCopy[checkedId] = true;
-  //   // setCheckTrueArr(checkTrueArrCopy);
-
-  //   // const priceDetailsCopy = priceArray;
-  //   // priceDetailsCopy.push(cost);
-  //   // setPriceArray(priceDetailsCopy);
-
-  //   // setPriceHtml(cost);
-  //   var checkedId = e.target.id;
-  //   var cost = e.target.cost;
-  //   console.log(cost);
-  //   if (e.target.checked == true) alert("i am checked");
-  //   else alert("i am not checked");
-  //   const priceArrayCopy = priceArray;
-  //   if (priceArrayCopy[checkedId] == null) {
-  //     priceArrayCopy[checkedId] = cost;
-  //     setPriceArray(priceArrayCopy);
-  //     console.log(priceArray);
-
-  //     sumPrice = sumPrice + parseInt(cost);
-  //     setSumPrice(sumPrice);
-  //   }
-  // }
-
   function expandCard(cardId) {
     setModalShow(true);
 
     setIdOfCard(cardId + 1);
 
-    // setExpandedModalData(data[cardId]);
-    // console.log(expandedModalData);
-
     var expandedModalDataCopy = expandedModalData;
     expandedModalDataCopy = data[cardId];
     setExpandedModalData(expandedModalDataCopy);
     console.log(expandedModalData);
-    console.log(images);
+    console.log("CHECKING FOR THE IMAGE PATH DATATABLE" + images);
   }
 
   return (
@@ -135,6 +97,7 @@ export default function Datatable({ data, images }) {
                 }}
               >
                 <img className="image" src="/image.jpg" alt="" />
+                {/* <img className="image" src="/resources/logo192.png" alt="" /> */}
                 <div>
                   <div className="card_details">
                     Site Code: {rows.site_code}
@@ -143,11 +106,16 @@ export default function Datatable({ data, images }) {
                   <div className="card_details">
                     Media Type: {rows.media_type}
                   </div>
+                  <div className="card_details">Segment: {rows.segment}</div>
                 </div>
                 <div>
                   <div className="card_details">
                     Price per month: {rows.display_cost}
                   </div>
+                  <div className="card_details">
+                    Traffic Direction: {rows.traffic_movement}
+                  </div>
+                  <div className="card_details">Status: {rows.status}</div>
                   <Button>Add to campaign</Button>
                 </div>
               </div>
@@ -159,7 +127,7 @@ export default function Datatable({ data, images }) {
           {priceArray.map((onePrice) => (
             <p>
               {onePrice}
-              <br />
+              {/* <br /> */}
             </p>
           ))}
           <br />
@@ -184,7 +152,9 @@ export default function Datatable({ data, images }) {
           <div className="expand_site_modal_body">
             <div className="expand_site_modal_body_images">
               {images[idOfCard].map((image) => (
-                <img src={image} />
+                <div>
+                  <img src={image} />
+                </div>
               ))}
               {/* <img className="image" src="/image.jpg" alt="" />
               <img className="image" src="/image.jpg" alt="" />
@@ -219,6 +189,7 @@ export default function Datatable({ data, images }) {
                   Printing Material :{expandedModalData.printing_material}
                 </div>
                 <div>Owner of Media :{expandedModalData.owner_of_media}</div>
+                <div>Status :{expandedModalData.status}</div>
               </div>
             </div>
           </div>
@@ -232,6 +203,7 @@ export default function Datatable({ data, images }) {
           >
             Reset
           </Button> */}
+          <Button onClick={() => setModalShow(false)}>Add to campaign</Button>
           <Button onClick={() => setModalShow(false)}>Cancel</Button>
           {/* <Button onClick={addTheSite}>Create</Button> */}
         </Modal.Footer>
@@ -245,4 +217,4 @@ export default function Datatable({ data, images }) {
 
 // trying to fix the parameter passing, calling images to be displayed, giving an option on each tile to add that site to a campaign.
 
-// wp php - turn off a flag to server content on https, - 
+// wp php - turn off a flag to server content on https, -

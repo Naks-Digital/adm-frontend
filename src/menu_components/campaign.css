@@ -1,0 +1,62 @@
+.home_campaign {
+  display: flex;
+}
+
+.ongoing {
+  height: 300px;
+  width: 20%;
+  margin: 1%;
+  padding: 2%;
+  border-radius: 10%;
+  background-image: linear-gradient(
+    rgb(240, 239, 239),
+    rgba(25, 0, 255, 0.747)
+  );
+  text-align: center;
+  justify-content: center;
+}
+
+.upcoming {
+  height: 300px;
+  width: 20%;
+  margin: 1%;
+  padding: 2%;
+  border-radius: 10%;
+  background-image: linear-gradient(rgb(240, 239, 239), rgb(25, 0, 255, 0.747));
+  text-align: center;
+  justify-content: center;
+}
+
+.expired {
+  height: 300px;
+  width: 20%;
+  margin: 1%;
+  padding: 2%;
+  border-radius: 10%;
+  background-image: linear-gradient(rgb(240, 239, 239), rgb(25, 0, 255, 0.747));
+  text-align: center;
+  justify-content: center;
+}
+
+.statistics {
+  width: 34%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.campaign_buttons {
+  float: right;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* .no_of_campaigns {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+} */

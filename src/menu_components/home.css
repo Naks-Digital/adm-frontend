@@ -1,0 +1,74 @@
+.home_parent {
+  display: flex;
+}
+.campaign_tile {
+  height: 300px;
+  width: 20%;
+  margin: 4%;
+  padding: 2%;
+  border-radius: 10%;
+  /* background-image: linear-gradient(rgb(240, 239, 239), rgb(0, 162, 255)); */
+  text-align: center;
+  justify-content: center;
+  background-image: linear-gradient(
+    rgb(240, 239, 239),
+    rgba(25, 0, 255, 0.747)
+  );
+  text-align: center;
+  justify-content: center;
+}
+.photographs_tile {
+  height: 300px;
+  width: 20%;
+  margin: 4%;
+  padding: 2%;
+  border-radius: 10%;
+  background-image: linear-gradient(rgb(240, 239, 239), rgb(0, 162, 255));
+  text-align: center;
+  justify-content: center;
+}
+.site_tile {
+  height: 300px;
+  width: 20%;
+  margin: 4%;
+  padding: 2%;
+  border-radius: 10%;
+  background-image: linear-gradient(rgb(240, 239, 239), rgb(0, 162, 255));
+  text-align: center;
+  justify-content: center;
+}
+.profile_tile {
+  height: 300px;
+  width: 20%;
+  margin: 4%;
+  padding: 2%;
+  border-radius: 10%;
+  background-image: linear-gradient(rgb(240, 239, 239), rgb(0, 162, 255));
+  text-align: center;
+  justify-content: center;
+}
+
+.ongoing {
+  height: 300px;
+  width: 20%;
+  margin: 1%;
+  padding: 2%;
+  border-radius: 10%;
+  background-image: linear-gradient(
+    rgb(240, 239, 239),
+    rgba(25, 0, 255, 0.747)
+  );
+  text-align: center;
+  justify-content: center;
+}
+
+.upcoming {
+  height: 300px;
+  width: 20%;
+  margin: 1%;
+  padding: 2%;
+  border-radius: 10%;
+  background-image: linear-gradient(rgb(240, 239, 239), rgb(25, 0, 255, 0.747));
+  text-align: center;
+  justify-content: center;
+}

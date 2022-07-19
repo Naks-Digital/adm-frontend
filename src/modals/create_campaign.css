@@ -1,0 +1,68 @@
+.body_parent {
+  display: grid;
+  width: 100%;
+}
+
+.campaign_inputs {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+/* 
+.campaign_inputs_left {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.campaign_inputs_child {
+  margin: 5%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.campaign_inputs_right {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: space-evenly;
+} */
+
+.campaign_labels_left {
+  width: 25%;
+  display: grid;
+}
+.campaign_inputs_left {
+  width: 25%;
+  display: grid;
+}
+.campaign_labels_right {
+  width: 25%;
+  display: grid;
+}
+.campaign_inputs_right {
+  width: 25%;
+  display: grid;
+}
+
+.campaign_labels_left > label {
+  margin: 10%;
+}
+
+.campaign_labels_right > label {
+  margin: 10%;
+}
+
+.campaign_inputs_left > input {
+  margin: 7%;
+  width: 90%;
+}
+
+.campaign_inputs_right > input {
+  margin: 7%;
+  width: 90%;
+}

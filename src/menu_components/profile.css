@@ -1,0 +1,26 @@
+.profile_parent {
+  display: flex;
+  margin: 0 5% 0 5%;
+}
+
+.control_div {
+  background-color: rgb(68, 68, 64);
+  width: 20%;
+  padding: 1%;
+  color: white;
+}
+
+#component_div {
+  width: 80%;
+  padding: 2% 5% 2% 5%;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+.control_div_subsections {
+  padding: 2%;
+}
+
+.control_div_subsections_img {
+  text-align: center;
+}

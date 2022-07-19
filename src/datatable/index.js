@@ -106,6 +106,7 @@ export default function Datatable({ data, images }) {
                   <div className="card_details">
                     Media Type: {rows.media_type}
                   </div>
+                  <div className="card_details">Segment: {rows.segment}</div>
                 </div>
                 <div>
                   <div className="card_details">

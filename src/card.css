@@ -43,7 +43,7 @@ td {
 .media_card {
   display: flex;
   background-color: rgba(133, 133, 133, 0.473);
-  width: 510px;
+  width: 1500px;
   height: 250px;
   margin: 10px;
   border-radius: 10px;
@@ -62,6 +62,7 @@ td {
 
 .check_card {
   display: flex;
+  justify-content: center;
 }
 
 .total_price {
